@@ -19,23 +19,96 @@ jobs:
       with:
         test-name: Compile
         setup-command: ''
-        command: g++ -std=c++17 -Wall -Werror lab01-part-b.cpp Student.cpp -o main
+        command: g++ -std=c++17 -Wall -Werror lab-1-part-b.cpp Student.cpp -o main
         timeout: 10
         max-score: 5
-    - name: Make check.sh executable
-      run: chmod +x check.sh
-    - name: All students present
-      id: all-students-present
-      uses: classroom-resources/autograding-command-grader@v1
+    - name: All students valid ages
+      id: all-students-valid-ages
+      uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: All students present
-        command: ./check.sh
+        test-name: All students valid ages
+        setup-command: ''
+        command: "./main"
+        input: |
+          Alice
+          20
+          Bob
+          25
+          Carol
+          30
+          Dave
+          40
+          Eve
+          50
+        expected-output: |
+          Student #1
+              Name: Alice
+              Age: 20
+
+          Student #2
+              Name: Bob
+              Age: 25
+
+          Student #3
+              Name: Carol
+              Age: 30
+
+          Student #4
+              Name: Dave
+              Age: 40
+
+          Student #5
+              Name: Eve
+              Age: 50
+        comparison-method: contains
         timeout: 10
         max-score: 10
+    - name: Underage and overage adjusted
+      id: underage-and-overage-adjusted
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Underage and overage adjusted
+        setup-command: ''
+        command: "./main"
+        input: |
+          John
+          15
+          Mary
+          60
+          Tom
+          10
+          Kate
+          55
+          Alex
+          18
+        expected-output: |
+          Student #1
+              Name: John
+              Age: 18
+
+          Student #2
+              Name: Mary
+              Age: 50
+
+          Student #3
+              Name: Tom
+              Age: 18
+
+          Student #4
+              Name: Kate
+              Age: 50
+
+          Student #5
+              Name: Alex
+              Age: 18
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         COMPILE_RESULTS: "${{steps.compile.outputs.result}}"
-        ALL-STUDENTS-PRESENT_RESULTS: "${{steps.all-students-present.outputs.result}}"
+        ALL-STUDENTS-VALID-AGES_RESULTS: "${{steps.all-students-valid-ages.outputs.result}}"
+        UNDERAGE-AND-OVERAGE-ADJUSTED_RESULTS: "${{steps.underage-and-overage-adjusted.outputs.result}}"
       with:
-        runners: compile,all-students-present
+        runners: compile,all-students-valid-ages,underage-and-overage-adjusted
