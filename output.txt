@@ -1,0 +1,40 @@
+Student object created!
+Student object created!
+Student object created!
+Student object created!
+Student object created!
+Enter the name for student #1: John Doe
+Enter the age for student #1: 19
+Enter the name for student #2: Jane Doe
+Enter the age for student #2: 20
+Enter the name for student #3: Billy Bob
+Enter the age for student #3: 21
+Enter the name for student #4: Bob Billy
+Enter the age for student #4: 22
+Enter the name for student #5: Billy Bob Joe
+Enter the age for student #5: 23
+Student #1
+        Name: John Doe
+        Age: 19
+
+Student #2
+        Name: Jane Doe
+        Age: 20
+
+Student #3
+        Name: Billy Bob
+        Age: 21
+
+Student #4
+        Name: Bob Billy
+        Age: 22
+
+Student #5
+        Name: Billy Bob Joe
+        Age: 23
+
+Student object destroyed!
+Student object destroyed!
+Student object destroyed!
+Student object destroyed!
+Student object destroyed!
