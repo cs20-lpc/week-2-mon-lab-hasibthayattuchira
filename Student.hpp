@@ -1,3 +1,6 @@
+#ifndef STUDENT_HPP
+#define STUDENT_HPP
+
 #include <iostream>
 #include <string>
 
@@ -39,3 +42,5 @@ class Student{
             return *age;
         }
 };
+
+#endif
